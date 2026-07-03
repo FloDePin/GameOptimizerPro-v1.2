@@ -1,11 +1,11 @@
-# ⚡ GameOptimizerPro v1.0
+# ⚡ GameOptimizerPro v1.1
 
 > **Windows & Gaming Optimizer** — by FloDePin
 
 ![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-blue?logo=powershell)
 ![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D6?logo=windows)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.0-red)
+![Version](https://img.shields.io/badge/Version-1.1-red)
 
 ---
 
@@ -14,7 +14,7 @@
 Open **PowerShell as Administrator** and run:
 
 ```powershell
-irm https://raw.githubusercontent.com/FloDePin/GameOptimizerPro/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/FloDePin/GameOptimizerPro-v1.1/main/install.ps1 | iex
 ```
 
 ---
@@ -26,26 +26,28 @@ irm https://raw.githubusercontent.com/FloDePin/GameOptimizerPro/main/install.ps1
 ### GUI Übersicht
 Das Tool bietet eine moderne, benutzerfreundliche Oberfläche mit:
 - 🎨 **Dark-Mode UI** — Moderne WPF/XAML Oberfläche
-- 🖱️ **Intuitive Navigation** — 6 Tabs für alle Funktionen
+- 🖱️ **Intuitive Navigation** — 7 Tabs für alle Funktionen
 - ℹ️ **Info-Buttons** — Detaillierte Erklärungen für jeden Tweak
 - 📊 **System Info** — GPU, CPU, RAM Status in Echtzeit
+- 🔧 **BIOS Guide** — Hardware-erkannte Optimierungsempfehlungen
 
 ---
 
 ## ✨ Features
 
-| Tab | Tweaks | Description |
-|-----|--------|-------------|
-| 🪟 Windows | 12 Tweaks | Debloat, Datenschutz, Win11-Tweaks, Win10-Grauausblendung + Banner |
+| Tab | Features | Description |
+|-----|----------|-------------|
+| 🪟 Windows | 15 Tweaks | Debloat, Datenschutz, Win11-Tweaks, Performance-Tweaks |
 | 🔊 Audio | 6 Tweaks | Audio-Tweaks, eigener Tab |
 | 🎮 GPU Tweaks | 7 Tweaks | 4 NVIDIA + 3 AMD Tweaks, GPU-Erkennung, Brand-Grauausblendung |
 | ⚡ Power Plan | 7 Tweaks | USB, PCI-E, HDD, Display, Sleep, CPU Min/Max |
 | 🚀 Startup Manager | ✅ | Eigenes Fenster, HKCU/HKLM/Run32, Disable/Enable/Refresh |
-| 🌍 Language DE/EN | ✅ | 80 EN-Beschreibungen, Toggle-Button, live umschaltbar |
+| 🔧 **[BIOS] BIOS Guide** | ✅ **NEW** | Hardware-spezifische BIOS-Empfehlungen mit Menüpfaden |
+| 🌍 Language DE/EN | ✅ | 80+ EN-Beschreibungen, Toggle-Button, live umschaltbar |
 
 ---
 
-## 🪟 Windows Tab - 12 Tweaks
+## 🪟 Windows Tab - 15 Tweaks
 
 ### 🧹 Debloat & System Cleanup
 - **Remove Cortana** — Entfernt den Windows Sprachassistenten
@@ -64,6 +66,11 @@ Das Tool bietet eine moderne, benutzerfreundliche Oberfläche mit:
 - **OS-Scan** — Scannt das Betriebssystem auf Optimierungspotenziale
 - **Win11 Tweaks** — Spezialisierte Optimierungen für Windows 11
 - **Win10 Grauausblendung + Banner** — Optimierte Darstellung für Windows 10-Kompatibilität
+
+### ⚡ Performance-Tweaks (NEW in v1.1)
+- **Disable Power Throttling** — Verhindert, dass Windows Gaming-Prozesse per EcoQoS drosselt
+- **Disable Bing in Windows Search** — Startmenü sucht nur noch lokal, kein Datenaustausch mit Microsoft
+- **Process Count Reduction (Svchost)** — Weniger Hintergrundprozesse durch erhöhten Split-Threshold
 
 ---
 
@@ -114,6 +121,31 @@ Das Tool bietet eine moderne, benutzerfreundliche Oberfläche mit:
 
 ---
 
+## 🔧 [BIOS] BIOS Guide Tab - NEW in v1.1
+
+### 🎯 Hardware-spezifische BIOS-Empfehlungen
+- **Automatische Hardware-Erkennung** — Erkennt CPU, Motherboard und GPU
+- **Konkrete Menüpfade** — Genaue Navigation im BIOS mit deutschen Beschreibungen
+- **Sicherheitsbewertung** — Jede Empfehlung mit Risiko-Badge (Sicher / Moderat)
+- **3 vordefinierte Profile:**
+  - **Zen 5/4 (AM5)** — Ryzen 7000/9000 Serie mit Gigabyte/ASUS/MSI
+  - **Intel 13./14. Gen** — i9-13900/14900 mit entsprechenden Boards
+  - **Zen 3 (AM4)** — Ryzen 5000 Serie für ältere AM4-Systeme
+
+### 📋 Beispiel-Empfehlungen für Ryzen 7 9800X3D + Gigabyte X870 + RTX 4080:
+- **EXPO Profil 1 aktivieren** — RAM läuft sonst auf 4800 MHz statt Nennwert (Sicher)
+- **PBO auf Auto** — Precision Boost Overdrive optimieren (Sicher)
+- **Resizable BAR aktivieren** — Bessere GPU/CPU-Kommunikation (Sicher)
+- **FCLK/UCLK Ratio für X3D CPUs** — Optimale Memory-Timing (Moderat)
+- **Curve Optimizer für Extra-Performance** — CPU-Undervolting möglich (Moderat)
+
+### 📖 Read-Only Ratgeber
+- Keine automatischen Änderungen — Nur informativ
+- Benutzer muss BIOS-Änderungen manuell vornehmen
+- Ideal als Checkliste vor dem Tuning
+
+---
+
 ## 🌍 Language Toggle - DE/EN
 
 ### 🗣️ Mehrsprachigkeit
@@ -146,6 +178,13 @@ Das Tool bietet eine moderne, benutzerfreundliche Oberfläche mit:
 - ✅ **AMD** — Radeon RX Serie (alle modernen GPUs)
 - ⚠️ **Intel Arc** — Begrenzte Unterstützung (nutzt AMD-Tweaks)
 
+### CPU Kompatibilität (BIOS Guide)
+- ✅ **AMD Zen 5** — Ryzen 7000X3D / 9000 Series (Threadripper)
+- ✅ **AMD Zen 4** — Ryzen 5000X3D / 7000 Series
+- ✅ **Intel 13./14. Gen** — Core i9-13900/14900, i7-13700/14700
+- ✅ **AMD Zen 3** — Ryzen 5000 Series (AM4)
+- ⚠️ **Andere CPUs** — BIOS Guide zeigt generische Empfehlungen
+
 ---
 
 ## 🛡️ Safety & Security
@@ -153,6 +192,7 @@ Das Tool bietet eine moderne, benutzerfreundliche Oberfläche mit:
 ✅ **System Restore Point** — Wird vor allen Tweaks automatisch erstellt  
 ✅ **Detailliertes Logging** — Alle Aktionen werden in `%TEMP%\GameOptimizerPro_*.log` protokolliert  
 ✅ **Hardware Detection** — GPU-spezifische Tweaks werden automatisch gefiltert  
+✅ **BIOS Guide Read-Only** — Keine automatischen Systemänderungen vom BIOS-Tab  
 ✅ **Vollständig reversibel** — Alle Tweaks können über System Restore rückgängig gemacht werden  
 ✅ **Keine Malware** — Open-Source, vollständig überprüfbar
 
@@ -162,11 +202,12 @@ Das Tool bietet eine moderne, benutzerfreundliche Oberfläche mit:
 
 - **Moderne Dark-Mode UI** — Basierend auf WPF/XAML
 - **Info-Buttons (?)** — Hover über `?` für Erklärungen zu jedem Tweak
-- **6 Tabs für Kategorien** — Windows | Audio | GPU Tweaks | Power Plan | Startup Manager | Language
+- **7 Tabs für Kategorien** — Windows | Audio | GPU Tweaks | Power Plan | Startup Manager | **[BIOS] BIOS Guide** | Language
 - **Bulk Selektionen** — Select All / Deselect All Buttons
 - **Live Logging** — Log-Datei kann jederzeit geöffnet werden
 - **Hardware Info** — Zeigt GPU, CPU, RAM an
 - **Language Toggle** — Deutsch/Englisch Umschaltung
+- **BIOS-Empfehlungen** — Hardware-erkannte Optimierungsvorschläge
 
 ---
 
@@ -190,6 +231,12 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 - Neustarten nach GPU-Tweaks erforderlich!
 - Überprüfe die Log-Datei: `%TEMP%\GameOptimizerPro_*.log`
 
+### Problem: BIOS Guide zeigt keine Empfehlungen
+**Lösung:**
+- Stelle sicher, dass deine CPU unterstützt wird
+- BIOS-Empfehlungen benötigen Admin-Rechte für Hardware-Erkennung
+- Überprüfe die Log-Datei für erkannte Hardware
+
 ### Problem: Tweaks wurden nicht angewendet
 **Lösung:**
 - Neustarten erforderlich für viele Tweaks
@@ -204,6 +251,19 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ---
 
 ## 📜 Changelog
+
+### v1.1 ⭐ **CURRENT**
+- ✨ **3 neue Performance-Tweaks** im Windows-Tab:
+  - **Disable Power Throttling** — Verhindert EcoQoS-Drosselung bei Gaming
+  - **Disable Bing in Windows Search** — Nur lokale Suche, kein Datenaustausch
+  - **Process Count Reduction (Svchost)** — Weniger Hintergrundprozesse
+- 🔧 **Neuer [BIOS] BIOS Guide Tab** — Hardware-erkannte BIOS-Empfehlungen
+  - Automatische CPU/Motherboard/GPU-Erkennung
+  - Konkrete Menüpfade mit deutschen Beschreibungen
+  - Support für Zen 5/4 (AM5), Intel 13./14. Gen, Zen 3 (AM4)
+  - Sicherheitsbewertung (Sicher / Moderat) für jede Empfehlung
+  - Read-Only Ratgeber — keine automatischen Änderungen
+- 🎯 **Optimierte Hardware-Integration** — Bessere CPU/GPU-Erkennung
 
 ### v1.0
 - 🚀 **Initial release** mit umfangreicher Feature-Liste
@@ -229,28 +289,30 @@ Der Autor haftet nicht für Systemschäden durch unsachgemäße Verwendung.
 
 1. **Starte mit Safety** — Erst einige Tweaks testen, dann mehr hinzufügen
 2. **Debloat aktivieren** — Entferne unnötige vorinstallierte Apps für schnelleres System
-3. **GPU-Tweaks aktivieren** — Automatische Erkennung deiner GPU für beste Ergebnisse
-4. **Power Plan optimieren** — Passe die Einstellungen nach deinen Bedürfnissen an
-5. **Audio-Tweaks für Gaming** — Reduziere Audio-Latenz
-6. **Startup Manager nutzen** — Beschleunige den Boot durch Startup-Optimierung
-7. **NVIDIA/AMD Treiber aktuell halten** — Macht mehr aus als die meisten Tweaks
-8. **Nach GPU Tweaks neustarten** — GPU-Optimierungen brauchen einen Reboot
-9. **Logs überprüfen** — Bei Problemen die Log-Datei ansehen für Fehlerdetails
-10. **System Restore nutzen** — Alle Tweaks können jederzeit rückgängig gemacht werden
+3. **Performance-Tweaks nutzen** — Besonders Power Throttling & Bing-Deaktivierung
+4. **GPU-Tweaks aktivieren** — Automatische Erkennung deiner GPU für beste Ergebnisse
+5. **BIOS Guide vor Hardware-Tuning** — Lese die Empfehlungen vor BIOS-Änderungen
+6. **Power Plan optimieren** — Passe die Einstellungen nach deinen Bedürfnissen an
+7. **Audio-Tweaks für Gaming** — Reduziere Audio-Latenz
+8. **Startup Manager nutzen** — Beschleunige den Boot durch Startup-Optimierung
+9. **NVIDIA/AMD Treiber aktuell halten** — Macht mehr aus als die meisten Tweaks
+10. **Nach GPU Tweaks neustarten** — GPU-Optimierungen brauchen einen Reboot
+11. **Logs überprüfen** — Bei Problemen die Log-Datei ansehen für Fehlerdetails
+12. **System Restore nutzen** — Alle Tweaks können jederzeit rückgängig gemacht werden
 
 ---
 
 ## 🤝 Beitrag & Feedback
 
 ### Bugs melden
-Falls du einen Bug findest, erstelle bitte einen [Issue](https://github.com/FloDePin/GameOptimizerPro/issues)
+Falls du einen Bug findest, erstelle bitte einen [Issue](https://github.com/FloDePin/GameOptimizerPro-v1.1/issues)
 
 ### Feature-Wünsche
-Hast du eine Idee für ein neues Feature? [Teile es mit uns!](https://github.com/FloDePin/GameOptimizerPro/issues)
+Hast du eine Idee für ein neues Feature? [Teile es mit uns!](https://github.com/FloDePin/GameOptimizerPro-v1.1/issues)
 
 ### Support
 - 📧 E-Mail: flodepin@googlemail.com
-- 🐛 GitHub Issues: [Issues](https://github.com/FloDePin/GameOptimizerPro/issues)
+- 🐛 GitHub Issues: [Issues](https://github.com/FloDePin/GameOptimizerPro-v1.1/issues)
 
 ---
 
@@ -261,6 +323,7 @@ Hast du eine Idee für ein neues Feature? [Teile es mit uns!](https://github.com
 - 💾 **Disk Cleanup** — Automatische Speicherbereinigung
 - 🔄 **Backup & Restore** — Registry-Backups vor Tweaks
 - 🌙 **Auto-Scheduler** — Zeitgesteuerte Optimierungen
+- 📊 **Performance Dashboard** — Vorher/Nachher-Vergleiche
 
 ---
 
