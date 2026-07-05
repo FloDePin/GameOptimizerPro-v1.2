@@ -26,11 +26,10 @@ irm https://raw.githubusercontent.com/FloDePin/GameOptimizerPro-v1.1/main/instal
 ### GUI Übersicht
 Das Tool bietet eine moderne, benutzerfreundliche Oberfläche mit:
 - 🎨 **Dark-Mode UI** — Moderne WPF/XAML Oberfläche
-- 🖱️ **Intuitive Navigation** — 9 Tabs für alle Funktionen
+- 🖱️ **Intuitive Navigation** — 7 Tabs für alle Funktionen
 - ℹ️ **Info-Buttons** — Detaillierte Erklärungen für jeden Tweak
 - 📊 **System Info** — GPU, CPU, RAM Status in Echtzeit
 - 🔧 **BIOS Guide** — Hardware-erkannte Optimierungsempfehlungen
-- 📈 **Dashboard** — Live-Systemstatus und Snapshot-Vergleich
 
 ---
 
@@ -39,7 +38,7 @@ Das Tool bietet eine moderne, benutzerfreundliche Oberfläche mit:
 | Tab | Features | Description |
 |-----|----------|-------------|
 | 🪟 Windows | 15 Tweaks | Debloat, Datenschutz, Win11-Tweaks, Performance-Tweaks |
-| 🌐 Network | 12 Tweaks | Nagle, LSO, DNS, TCP-Tuning, QoS, Adapter Power Saving, Delivery Optimization + Live Ping-Test |
+| 🌐 Network | 10 Tweaks | Nagle, LSO, DNS, TCP-Tuning, QoS, Adapter Power Saving, Delivery Optimization + Live Ping-Test |
 | 🔊 Audio | 6 Tweaks | Audio-Tweaks, eigener Tab |
 | 🎮 GPU Tweaks | 7 Tweaks | 4 NVIDIA + 3 AMD Tweaks, GPU-Erkennung, Brand-Grauausblendung |
 | ⚡ Power Plan | 7 Tweaks | USB, PCI-E, HDD, Display, Sleep, CPU Min/Max |
@@ -74,25 +73,6 @@ Das Tool bietet eine moderne, benutzerfreundliche Oberfläche mit:
 - **Disable Power Throttling** — Verhindert, dass Windows Gaming-Prozesse per EcoQoS drosselt
 - **Disable Bing in Windows Search** — Startmenü sucht nur noch lokal, kein Datenaustausch mit Microsoft
 - **Process Count Reduction (Svchost)** — Weniger Hintergrundprozesse durch erhöhten Split-Threshold
-
----
-
-## 🌐 Network Tab - 12 Tweaks
-
-### 🌍 Netzwerk-Optimierungen
-- **Disable Nagle's Algorithm** — Reduziert Latenz durch sofortiges Senden von Paketen
-- **Disable LSO (Large Send Offload)** — Optimiert Datenübertragung
-- **DNS Optimization** — Schnellere DNS-Auflösung
-- **TCP Window Scaling** — Optimierte TCP-Fenstergröße für besseren Durchsatz
-- **Disable QoS Throttling** — Entfernt Bandbreitendrosselung
-
-### 🔋 Power Management & Datensparen
-- **Disable Network Adapter Power Saving** — Verhindert, dass Adapter in Sleep-Modus geht
-- **Disable Delivery Optimization (P2P)** — Deaktiviert P2P-Updates, reduziert Bandbreitenlast
-
-### 📊 Netzwerk-Monitoring
-- **Live Netzwerk-Info** — Anzeige von Adapter, Gateway, DNS
-- **Live Ping-Test** — Echtzeit Ping zu Gateway und 1.1.1.1 (Cloudflare DNS)
 
 ---
 
@@ -168,22 +148,6 @@ Das Tool bietet eine moderne, benutzerfreundliche Oberfläche mit:
 
 ---
 
-## 📊 [DASH] Dashboard Tab - NEW in v1.1.1
-
-### 📈 Live-Systemstatus
-- **Power Plan** — Aktuelle Energieplan-Einstellung
-- **Timer-Auflösung** — Systemtimer-Genauigkeit in Echtzeit
-- **Aktive Tweaks** — Übersicht welche Tweaks gerade aktiv sind
-- **Hardware-Info** — GPU, CPU, RAM Live-Status
-
-### 📸 Snapshot & Vergleich
-- **Before-Snapshot** — Systemzustand vor Tweaks speichern
-- **After-Snapshot** — Systemzustand nach Tweaks speichern
-- **Vorher/Nachher-Vergleich** — Detaillierter Vergleich der Systemmetriken
-- **Performance-Analyse** — Sichtbarmachung der Optimierungseffekte
-
----
-
 ## 🌍 Language Toggle - DE/EN
 
 ### 🗣️ Mehrsprachigkeit
@@ -242,13 +206,12 @@ Das Tool bietet eine moderne, benutzerfreundliche Oberfläche mit:
 
 - **Moderne Dark-Mode UI** — Basierend auf WPF/XAML
 - **Info-Buttons (?)** — Hover über `?` für Erklärungen zu jedem Tweak
-- **9 Tabs für Kategorien** — Windows | Network | Audio | GPU Tweaks | Power Plan | Startup Manager | **[BIOS] BIOS Guide** | **[DASH] Dashboard** | Language
+- **7 Tabs für Kategorien** — Windows | Audio | GPU Tweaks | Power Plan | Startup Manager | **[BIOS] BIOS Guide** | Language
 - **Bulk Selektionen** — Select All / Deselect All Buttons
 - **Live Logging** — Log-Datei kann jederzeit geöffnet werden
 - **Hardware Info** — Zeigt GPU, CPU, RAM an
 - **Language Toggle** — Deutsch/Englisch Umschaltung
 - **BIOS-Empfehlungen** — Hardware-erkannte Optimierungsvorschläge
-- **Dashboard** — Live-Systemstatus und Before/After-Vergleich
 
 ---
 
@@ -289,34 +252,22 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 - Nutze System Restore um alle Änderungen rückgängig zu machen
 - Starte mit weniger Tweaks und teste dann mehr
 
-### Problem: Network Ping-Test zeigt falsche Werte
-**Lösung:**
-- Stelle sicher, dass du mit dem Internet verbunden bist
-- Firewall könnte ICMP-Pakete blockieren
-- Versuche, die Firewall-Einstellungen anzupassen
-
 ---
 
 ## 📜 Changelog
 
-### v1.1.1 ⭐ **CURRENT** (Live Features)
+### v1.1.1 (lokaler Patch, noch nicht veröffentlicht)
 - 🐛 **Bugfix:** 3 Tweaks (Power Throttling, Bing-Suche, Svchost-Reduktion) wurden durch einen Copy-Paste-Fehler bei jedem Programmstart automatisch wieder rückgängig gemacht — behoben
+- 🌍 **Bugfix (Sprache):** Auf nicht-englischem Windows (z.B. Deutsch) lieferte der Status-Check für "Disable TCP Auto-Tuning" immer "unbekannt" statt des echten Status (netsh-Textsuche war auf Englisch hartkodiert) — jetzt sprachunabhängig via `Get-NetTCPSetting`
+- 🌍 **Bugfix (Sprache):** "Revert All" konnte den Energiesparplan "Balanced" auf deutschem Windows nie finden ("Ausbalanciert") und hat den Revert fälschlich als erfolgreich geloggt, obwohl nichts passiert ist — jetzt über die feste, sprachunabhängige Windows-GUID gelöst
 - 🛡️ **Sanity-Check beim Start** — Erkennt automatisch, falls ein Status-Check jemals wieder mit einer Revert-Aktion verwechselt wird
 - 💾 **Registry-Backup** — Vor jedem Apply/Revert werden betroffene Registry-Keys zusätzlich als `.reg`-Dateien gesichert (unabhängig vom System-Restore-Point-Limit)
 - 🔒 **Checksum-Verifizierung** — `install.ps1` prüft den Download gegen `CHECKSUMS.txt`
-- 🌐 **2 neue Network-Tweaks**:
-  - **Disable Network Adapter Power Saving** — Verhindert, dass der Netzwerk-Adapter in Sleep-Modus geht
-  - **Disable Delivery Optimization (P2P Updates)** — Reduziert Bandbreitenlast durch Deaktivierung von P2P-Updates
-- 📶 **Live Netzwerk-Info + Ping-Test** im Network-Tab:
-  - Zeigt aktiven Netzwerk-Adapter an
-  - Gateway und DNS in Echtzeit
-  - Live Ping-Test zu Gateway und 1.1.1.1 (Cloudflare DNS)
-- 📊 **Neuer [DASH] Dashboard Tab**:
-  - Live-Systemstatus (Power Plan, Timer-Auflösung, aktive Tweaks)
-  - Before/After-Snapshot für Vergleich
-  - Metriken-Vergleich vor und nach Optimierung
+- 🌐 **2 neue Network-Tweaks** — Disable Network Adapter Power Saving, Disable Delivery Optimization (P2P Updates)
+- 📶 **Live Netzwerk-Info + Ping-Test** im Network-Tab (Adapter, Gateway, DNS, Ping zu Gateway/1.1.1.1)
+- 📊 **Neuer [DASH] Dashboard Tab** — Live-Systemstatus (Power Plan, Timer-Auflösung, aktive Tweaks) sowie Snapshot/Vergleich für Vorher-Nachher-Auswertung
 
-### v1.1
+### v1.1 ⭐ **CURRENT**
 - ✨ **3 neue Performance-Tweaks** im Windows-Tab:
   - **Disable Power Throttling** — Verhindert EcoQoS-Drosselung bei Gaming
   - **Disable Bing in Windows Search** — Nur lokale Suche, kein Datenaustausch
@@ -363,7 +314,6 @@ Der Autor haftet nicht für Systemschäden durch unsachgemäße Verwendung.
 10. **Nach GPU Tweaks neustarten** — GPU-Optimierungen brauchen einen Reboot
 11. **Logs überprüfen** — Bei Problemen die Log-Datei ansehen für Fehlerdetails
 12. **System Restore nutzen** — Alle Tweaks können jederzeit rückgängig gemacht werden
-13. **Dashboard nutzen** — Vergleiche Before/After-Snapshots für messbare Performance-Gewinne
 
 ---
 
