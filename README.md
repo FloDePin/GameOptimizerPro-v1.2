@@ -5,7 +5,7 @@
 ![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-blue?logo=powershell)
 ![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D6?logo=windows)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.2.0-red)
+![Version](https://img.shields.io/badge/Version-1.2.1-red)
 
 🇬🇧 **English** | 🇩🇪 [Deutsch](README.de.md)
 
@@ -40,7 +40,7 @@ The tool offers a modern, user-friendly interface with:
 | Tab | Features | Description |
 |-----|----------|-------------|
 | 🪟 Windows | 22 Tweaks | Debloat, privacy, Win11 tweaks, performance tweaks + **7 new CTT Essentials** |
-| 🌐 Network | 10 Tweaks | Nagle, LSO, DNS, TCP tuning, QoS, adapter power saving, delivery optimization + live ping test |
+| 🌐 Network | 10 Tweaks | Nagle, LSO, DNS, TCP tuning, QoS, adapter power saving, delivery optimization + async ping test (latency, packet loss, jitter to gateway/1.1.1.1/8.8.8.8) |
 | 🔊 Audio | 6 Tweaks | Audio tweaks, dedicated tab |
 | 🎮 GPU Tweaks | 7 Tweaks | 4 NVIDIA + 3 AMD tweaks, GPU detection, brand grey-out |
 | ⚡ Power Plan | 7 Tweaks | USB, PCI-E, HDD, display, sleep, CPU min/max |
@@ -270,7 +270,11 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ## 📜 Changelog
 
-### v1.2.0 ⭐ **CURRENT**
+### v1.2.1 ⭐ **CURRENT**
+- 📶 **Enhanced Ping Test** in the Network tab — now measures **average latency, packet loss % and jitter** across **3 targets** (gateway, Cloudflare 1.1.1.1, Google 8.8.8.8), 10 pings each. Shows whether the network tweaks actually help.
+- ⚡ Runs on a background runspace so the UI stays fully responsive during the ~30s test (no freeze), with locale-independent number formatting.
+
+### v1.2.0
 - 🧰 **7 new "CTT Essentials" tweaks** in the Windows tab (parity with Chris Titus Tech WinUtil), each with full Apply/Revert/Status-Check:
   - **Prevent Device Companion Apps** — blocks device metadata downloads + auto-suggested companion apps
   - **Disable Consumer Features** — stops auto-installed suggested apps/games in the Start menu

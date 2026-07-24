@@ -5,7 +5,7 @@
 ![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-blue?logo=powershell)
 ![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D6?logo=windows)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.2.0-red)
+![Version](https://img.shields.io/badge/Version-1.2.1-red)
 
 🇬🇧 [English](README.md) | 🇩🇪 **Deutsch**
 
@@ -40,7 +40,7 @@ Das Tool bietet eine moderne, benutzerfreundliche Oberfläche mit:
 | Tab | Features | Description |
 |-----|----------|-------------|
 | 🪟 Windows | 22 Tweaks | Debloat, Datenschutz, Win11-Tweaks, Performance-Tweaks + CTT Essentials |
-| 🌐 Network | 10 Tweaks | Nagle, LSO, DNS, TCP-Tuning, QoS, Adapter Power Saving, Delivery Optimization + Live Ping-Test |
+| 🌐 Network | 10 Tweaks | Nagle, LSO, DNS, TCP-Tuning, QoS, Adapter Power Saving, Delivery Optimization + asynchroner Ping-Test (Latenz, Paketverlust, Jitter zu Gateway/1.1.1.1/8.8.8.8) |
 | 🔊 Audio | 6 Tweaks | Audio-Tweaks, eigener Tab |
 | 🎮 GPU Tweaks | 7 Tweaks | 4 NVIDIA + 3 AMD Tweaks, GPU-Erkennung, Brand-Grauausblendung |
 | ⚡ Power Plan | 7 Tweaks | USB, PCI-E, HDD, Display, Sleep, CPU Min/Max |
@@ -258,7 +258,11 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ## 📜 Changelog
 
-### v1.2.0 ⭐ **CURRENT**
+### v1.2.1 ⭐ **CURRENT**
+- 📶 **Erweiterter Ping-Test** im Network-Tab — misst jetzt **durchschnittliche Latenz, Paketverlust % und Jitter** über **3 Ziele** (Gateway, Cloudflare 1.1.1.1, Google 8.8.8.8), je 10 Pings. Zeigt, ob die Network-Tweaks wirklich etwas bringen.
+- ⚡ Läuft in einem Hintergrund-Runspace, damit die Oberfläche während des ~30s-Tests flüssig bleibt (kein Einfrieren), mit sprachunabhängiger Zahlenformatierung.
+
+### v1.2.0
 - 🧰 **7 neue „CTT Essentials"-Tweaks** im Windows-Tab (Parität zu Chris Titus Tech WinUtil), jeder mit Apply/Revert/Status-Check:
   - **Prevent Device Companion Apps** — blockiert Geräte-Metadaten-Downloads + automatisch vorgeschlagene Companion-Apps
   - **Disable Consumer Features** — stoppt automatisch installierte Vorschlags-Apps/Spiele im Startmenü

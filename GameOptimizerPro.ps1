@@ -9,7 +9,7 @@
 .AUTHOR
     FloDePin
 .VERSION
-    1.2.0
+    1.2.1
 #>
 
 $ErrorActionPreference = "Continue"
@@ -3327,41 +3327,81 @@ foreach ($cat in @("Windows","Gaming","Network","RAM & Storage","Windows 11","Au
         $pingRow.Margin      = New-Object Windows.Thickness(0,8,0,0)
 
         $pingBtn = New-Object Windows.Controls.Button
-        $pingBtn.Content   = "[PING] Ping Test (Gateway + 1.1.1.1)"
+        $pingBtn.Content   = "[PING] Ping Test (Gateway + 1.1.1.1 + 8.8.8.8)"
         $pingBtn.Style     = $Window.FindResource("PrimaryBtn")
         $pingBtn.Padding   = New-Object Windows.Thickness(8,4,8,4)
 
         $pingResult = New-Object Windows.Controls.TextBlock
         $pingResult.FontSize     = 12
         $pingResult.FontFamily   = New-Object Windows.Media.FontFamily("Consolas")
-        $pingResult.Margin       = New-Object Windows.Thickness(10,0,0,0)
-        $pingResult.VerticalAlignment = "Center"
+        $pingResult.Margin       = New-Object Windows.Thickness(0,8,0,0)
         $pingResult.Foreground   = New-Object Windows.Media.SolidColorBrush ([Windows.Media.Color]::FromRgb(170,170,170))
-        $pingResult.Text         = "Not tested yet"
+        $pingResult.TextWrapping = [Windows.TextWrapping]::Wrap
+        $pingResult.Text         = "Not tested yet  --  10 pings per target: avg latency, packet loss, jitter"
 
         $capturedGateway = $gateway
         $pingBtn.Add_Click({
-            $pingResult.Text = "Testing..."
-            $Window.Dispatcher.Invoke([Action]{}, [System.Windows.Threading.DispatcherPriority]::Render)
-            $lines = @()
-            if ($capturedGateway) {
-                try {
-                    $r = Test-Connection -ComputerName $capturedGateway -Count 3 -ErrorAction Stop
-                    $avg = [math]::Round(($r | Measure-Object -Property ResponseTime -Average).Average, 1)
-                    $lines += "Gateway ($capturedGateway): ${avg}ms"
-                } catch { $lines += "Gateway: unreachable" }
-            }
-            try {
-                $r2 = Test-Connection -ComputerName "1.1.1.1" -Count 3 -ErrorAction Stop
-                $avg2 = [math]::Round(($r2 | Measure-Object -Property ResponseTime -Average).Average, 1)
-                $lines += "Internet (1.1.1.1): ${avg2}ms"
-            } catch { $lines += "Internet: unreachable" }
-            $pingResult.Text = $lines -join "   |   "
+            $pingBtn.IsEnabled = $false
+            $pingResult.Text   = "Testing (10 pings per target -- UI stays responsive)..."
+
+            # Build target list (gateway may be unknown)
+            $tgts = New-Object System.Collections.ArrayList
+            if ($capturedGateway) { [void]$tgts.Add(@{ Name = "Gateway ($capturedGateway)"; Host = $capturedGateway }) }
+            [void]$tgts.Add(@{ Name = "Cloudflare (1.1.1.1)"; Host = "1.1.1.1" })
+            [void]$tgts.Add(@{ Name = "Google (8.8.8.8)";     Host = "8.8.8.8" })
+
+            # Run the pings on a background runspace so the WPF thread never freezes.
+            $sync = [hashtable]::Synchronized(@{ Done = $false; Text = "" })
+            $rs = [runspacefactory]::CreateRunspace()
+            $rs.ApartmentState = "MTA"
+            $rs.ThreadOptions  = "ReuseThread"
+            $rs.Open()
+            $rs.SessionStateProxy.SetVariable("sync", $sync)
+            $rs.SessionStateProxy.SetVariable("tgts", $tgts)
+
+            $psRun = [powershell]::Create()
+            $psRun.Runspace = $rs
+            [void]$psRun.AddScript({
+                $inv   = [System.Globalization.CultureInfo]::InvariantCulture
+                $count = 10
+                $lines = @()
+                foreach ($t in $tgts) {
+                    $replies = @(Test-Connection -ComputerName $t.Host -Count $count -ErrorAction SilentlyContinue)
+                    $recv = $replies.Count
+                    if ($recv -eq 0) { $lines += ("{0}: unreachable (100% loss)" -f $t.Name); continue }
+                    $loss = [math]::Round((($count - $recv) / $count) * 100, 0)
+                    $rtts = @($replies | ForEach-Object { [double]$_.ResponseTime })
+                    $avg  = ([math]::Round(($rtts | Measure-Object -Average).Average, 1)).ToString("0.#", $inv)
+                    $jit  = "0"
+                    if ($rtts.Count -ge 2) {
+                        $diffs = for ($j = 1; $j -lt $rtts.Count; $j++) { [math]::Abs($rtts[$j] - $rtts[$j-1]) }
+                        $jit = ([math]::Round(($diffs | Measure-Object -Average).Average, 1)).ToString("0.#", $inv)
+                    }
+                    $lines += ("{0}: {1} ms  |  loss {2}%  |  jitter {3} ms" -f $t.Name, $avg, $loss, $jit)
+                }
+                $sync.Text = $lines -join "`n"
+                $sync.Done = $true
+            })
+            $handle = $psRun.BeginInvoke()
+
+            # Poll for completion on the UI thread and clean up when done.
+            $timer = New-Object System.Windows.Threading.DispatcherTimer
+            $timer.Interval = [TimeSpan]::FromMilliseconds(300)
+            $timer.Add_Tick({
+                if ($sync.Done) {
+                    $timer.Stop()
+                    try { $psRun.EndInvoke($handle) } catch { }
+                    $psRun.Dispose(); $rs.Close(); $rs.Dispose()
+                    $pingResult.Text   = $sync.Text
+                    $pingBtn.IsEnabled = $true
+                }
+            }.GetNewClosure())
+            $timer.Start()
         }.GetNewClosure())
 
-        $pingRow.Children.Add($pingBtn)    | Out-Null
-        $pingRow.Children.Add($pingResult) | Out-Null
-        $netInfoStack.Children.Add($pingRow) | Out-Null
+        $pingRow.Children.Add($pingBtn)         | Out-Null
+        $netInfoStack.Children.Add($pingRow)    | Out-Null
+        $netInfoStack.Children.Add($pingResult) | Out-Null
 
         $netInfoBorder.Child = $netInfoStack
         $panel.Children.Add($netInfoBorder) | Out-Null
