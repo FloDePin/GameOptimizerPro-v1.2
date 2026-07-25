@@ -1,4 +1,4 @@
-# ⚡ GameOptimizerPro v1.2
+# ⚡ GameOptimizerPro v1.2.1
 
 > **Windows & Gaming Optimizer** — by FloDePin
 

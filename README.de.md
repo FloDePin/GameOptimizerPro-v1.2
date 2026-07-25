@@ -51,7 +51,7 @@ Das Tool bietet eine moderne, benutzerfreundliche Oberfläche mit:
 
 ---
 
-## 🪟 Windows Tab - 15 Tweaks
+## 🪟 Windows Tab - 22 Tweaks
 
 ### 🧹 Debloat & System Cleanup
 - **Remove Cortana** — Entfernt den Windows Sprachassistenten
