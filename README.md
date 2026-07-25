@@ -16,7 +16,7 @@
 Open **PowerShell as Administrator** and run:
 
 ```powershell
-irm https://raw.githubusercontent.com/FloDePin/GameOptimizerPro-v1.1/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/FloDePin/GameOptimizerPro/main/install.ps1 | iex
 ```
 
 ---
@@ -354,14 +354,14 @@ The author is not liable for system damage caused by improper use.
 ## 🤝 Contributing & Feedback
 
 ### Report Bugs
-If you find a bug, please open an [Issue](https://github.com/FloDePin/GameOptimizerPro-v1.1/issues)
+If you find a bug, please open an [Issue](https://github.com/FloDePin/GameOptimizerPro/issues)
 
 ### Feature Requests
-Have an idea for a new feature? [Share it with us!](https://github.com/FloDePin/GameOptimizerPro-v1.1/issues)
+Have an idea for a new feature? [Share it with us!](https://github.com/FloDePin/GameOptimizerPro/issues)
 
 ### Support
 - 📧 Email: flodepin@googlemail.com
-- 🐛 GitHub Issues: [Issues](https://github.com/FloDePin/GameOptimizerPro-v1.1/issues)
+- 🐛 GitHub Issues: [Issues](https://github.com/FloDePin/GameOptimizerPro/issues)
 
 ---
 

@@ -1,5 +1,5 @@
 $ErrorActionPreference = "Stop"
-$url  = "https://raw.githubusercontent.com/FloDePin/GameOptimizerPro-v1.1/main/GameOptimizerPro.ps1"
+$url  = "https://raw.githubusercontent.com/FloDePin/GameOptimizerPro/main/GameOptimizerPro.ps1"
 $dest = "$env:TEMP\GameOptimizerPro.ps1"
 
 # SHA256 of the last known-good GameOptimizerPro.ps1 release. Bump this
